@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Messages</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+
+    <script src="https://kit.fontawesome.com/0eaae9cbe1.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@500&family=Raleway&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="Images/TitleIcon.png">
+    <link rel="stylesheet" href="Styles/main.css">
+</head>
+
+<body>
+    <%-include("partials/navbar.ejs") %>
+     <div class="justify-content-evenly row main_container">
+        <%-include("partials/side.ejs")%>
+            <div class="title  text-white bg-black border-end border-start border-dark col-sm-5 main_Notification_center main_center ms-0">
+                <div class="d-flex bg-primary text-white justify-content-center p-3">Your Messages</div>
+            </div>
+        <div class="bg-black col-sm-4 p-4 mt-3 mainTweets">
+        </div>
+        </div>
+
+
+</body>
+
+</html>

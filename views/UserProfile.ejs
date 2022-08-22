@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Profile</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+
+    <script src="https://kit.fontawesome.com/0eaae9cbe1.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@500&family=Raleway&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../Images/TitleIcon.png">
+    <link rel="stylesheet" href="../Styles/main.css">
+</head>
+
+<body>
+   <%-include("partials/navbar")%>
+
+    <div class="justify-content-evenly row main_container">
+       <%-include("partials/side.ejs")%>
+        <div class="title  text-white bg-black border-end border-start border-dark col-sm-5 profile_center ms-0">
+            <div class="cover-photo">
+                <img src="../Images/defaultCover.webp" alt="" width="100%">
+            </div>
+            <div class="userData">
+                <div class="userImage">
+                    <img src=<%=data.img  %>  alt="">
+                </div>
+                <div class="userDetails">
+                    <div class="userName"><%=data.name  %></div>
+                    <div class="username font-light">@<%=data.username  %> </div>
+                    <div class="followdata">
+                        <div class="followers"><%=data.followers.length  %>  <span class="username">Followers</span></div>
+                        <div class="following"><%=data.following.length  %> <span class="username">Following</span></div>
+                    </div>
+                    <%if(data._id.toString()!=id){%>
+                        <% if(!followed){ %> 
+                             <div class="follow">
+                                <a href="/follow/<%=data._id.toString()%>"><button id="follow" class="rounded-pill text-white bg-primary p-2 ps-4 pe-4 mt-2">Follow</button></a>
+                            </div>
+                        <% } %> 
+                        <% if(followed){ %> 
+                            <div class="follow">
+                               <a href="/follow/<%=data._id.toString()%>"><button id="follow" class="rounded-pill text-white bg-primary p-2 ps-4 pe-4 mt-2">UnFollow</button></a>
+                           </div>
+                       <% } %> 
+                    <%}%>
+                </div>
+
+            </div>
+            <div class="Tweets">
+                <button class="w-100"><%=data.name  %>  Tweets</button>
+                <div class="tweets">
+                    <%Tweets.forEach(tweet => { %>
+                        <div class="newtweet border-top border-bottom border-dark p-2">
+                        <div class="img"><img src=<%=data.img%> alt="" onerror=this.src="/Images/AccountImage.png"> </div>
+                        <div class="tweetdata">
+                            <div class="nameU">
+                                <div class="name"><%=data.name%> </div>
+                                <div class="username text-light"><%=data.username%></div>
+                                <div class="time text-light">2h ago</div>
+                            </div>
+                            <div class="tweetmessage">
+                                <%=tweet.data%>
+                            </div>
+                            <div class="img">
+                            </div>
+                            <div class="options-icons">
+                                <i class="fa-regular fa-heart"><%=tweet.likes.length%></i>
+                                <i class="fa-regular fa-comment"><%=tweet.comments.length%></i>
+                            </div>
+                        </div>
+                        <%if(tweet.postedBy.toString()==data._id.toString()){%>
+                        <div class="delete">
+                            <a href="/delete/<%=tweet._id.toString()%>"><button> <i class="fa fa-trash text-white"></i> </button></a>
+                        </div>
+                        <%}%>
+                    </div>
+                    <%});%>
+                </div>
+            </div>
+        </div>
+        <div class="bg-black col-sm-4 p-4 mt-3" id="search">
+
+        </div>
+
+    </div>
+    <script src="../script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+
+    <script src="https://kit.fontawesome.com/0eaae9cbe1.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@500&family=Raleway&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="Images/TitleIcon.png">
+    <link rel="stylesheet" href="Styles/main.css">
+</head>
+
+<body>
+    <%-include("partials/navbar.ejs") %>
+     <div class="justify-content-evenly row main_container">
+        <%-include("partials/side.ejs")%>
+        <div class="title  text-white bg-black border-end border-start border-dark col-sm-5 main_center ms-0">
+            <div class="tweetAdd">
+                <div class="img"><img src=<%=data.img%> alt="" onerror=this.src="/Images/AccountImage.png"> <textarea name="tweetAdd" id="tweetAdd"
+                        placeholder="What's Happening ?" row="10" col="10"></textarea></div>
+            </div>
+            <div class="d-flex justify-content-end m-3">
+                    <button type="submit"
+                    class="bg-primary text-white rounded-pill" id="tweetS">Tweet</button>
+            </div>
+            <%Tweetsdata.forEach(tweet => { %>
+                <div class="newtweet border-top border-bottom border-dark p-2">
+                <div class="img"><img src=<%=tweet.userdata.img%> alt="" onerror=this.src="/Images/AccountImage.png"> </div>
+                <div class="tweetdata">
+                    <div class="nameU">
+                        <div class="name"><a href="/profile/<%=tweet.userdata._id%>"><%=tweet.userdata.name%></a></div>
+                        <div class="username">@<%=tweet.userdata.username%></div>
+                        <div class="time text-light">2h ago</div>
+                    </div>
+                    <div class="tweetmessage">
+                        <%=tweet.data%>
+                    </div>
+                    <div class="img">
+                    </div>
+                    <div class="options-icons">
+                        <i class="fa-regular fa-heart"><%=tweet.likes.length%></i>
+                        <i class="fa-regular fa-comment"><%=tweet.comments.length%></i>
+                    </div>
+                </div>
+                <%if(tweet.postedBy.toString()==data._id.toString()){%>
+                <div class="delete">
+                    <a href="/delete/<%=tweet._id.toString()%>"><button> <i class="fa fa-trash text-white"></i> </button></a>
+                </div>
+                <%}%>
+            </div>
+            <%});%>
+            
+        </div>
+        <div class="bg-black col-sm-4 p-4 mt-3" id="mainTweets">
+        </div>
+        </div>
+
+        <script src="script.js"></script>
+</body>
+
+</html>
